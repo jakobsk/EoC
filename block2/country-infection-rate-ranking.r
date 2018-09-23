@@ -3,9 +3,9 @@ spamhaus <- read.csv("spamhaus.csv")
 countries <- read.csv("countries.csv")
 
 # Preprocess
+spamhaus$Diagnostic <- as.character(spamhaus$Diagnostic)
 spamhaus <- spamhaus[(startsWith(spamhaus$Diagnostic, "BOT")),]
 spamhaus <- spamhaus[(spamhaus$Country != "" & spamhaus$Country != "??"),]
-spamhaus$Diagnostic <- as.character(spamhaus$Diagnostic)
 
 countries <- countries[c("Symbol", "Internet.users")]
 colnames(countries) <- c("Country", "InternetUsers")
