@@ -30,4 +30,5 @@ infectionsPerCountry$Infections <- NULL
 infectionsPerCountry$InternetUsers <- NULL
 
 # Plot
-## TODO
+dfSorted <- infectionsPerCountry[with(infectionsPerCountry,order(-InfectionRate)),]
+boxplot(dfSorted$InfectionRate, ylim=c(0,0.01), main="Boxplot of infection rate per country")
