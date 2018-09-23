@@ -15,7 +15,7 @@ colnames(ipsPerAllocation)[4] <- "IPs"
 # Allocation block size
 ipsPerAllocation$AllocationSize <- regmatches(ipsPerAllocation$Allocation, regexpr("/.*", ipsPerAllocation$Allocation))
 ipsPerAllocation$AllocationSize <- regmatches(ipsPerAllocation$AllocationSize, regexpr("[^/]+", ipsPerAllocation$AllocationSize))
-ipsPerAllocation$AllocationSize <- as.numeric(ipsPerAllocation$AllocationSize)
+ipsPerAllocation$AllocationSize <- as.numeric(as.character(ipsPerAllocation$AllocationSize))
 ipsPerAllocation$AllocationSize <- 2^(32 - ipsPerAllocation$AllocationSize)
 ipsPerAllocation$Allocation <- NULL
 
