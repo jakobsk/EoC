@@ -1,3 +1,5 @@
+library(plyr)
+
 # Spamhaus
 spamhaus <- read.csv("spamhaus.csv")
 
@@ -31,4 +33,4 @@ infectionsPerCountry$InternetUsers <- NULL
 
 # Plot
 dfSorted <- infectionsPerCountry[with(infectionsPerCountry,order(-InfectionRate)),]
-boxplot(dfSorted$InfectionRate, ylim=c(0,0.01), main="Boxplot of infection rate per country")
+boxplot(dfSorted$InfectionRate, ylim=c(0, 0.01), ylab="Infection rate", main="Infection rate per country")
