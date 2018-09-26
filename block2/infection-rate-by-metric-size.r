@@ -21,9 +21,7 @@ ipsPerAllocation$Allocation <- NULL
 
 # Sum size and IPs per ASN
 asnRates <- aggregate(. ~ Country+ASN, ipsPerAllocation, sum)
-asnRates$Percentage <- asnRates$IPs / asnRates$AllocationSize
 asnRates$ASN <- NULL
-asnRates$IPs <- NULL
 
 # Plot
-plot(asnRates$AllocationSize, asnRates$Percentage, log="x", xlab="Number of allocations", ylab="Infection rate", main="AS infection rate by size")
+plot(asnRates$AllocationSize, asnRates$IPs, log="xy", xlab="Number of allocations", ylab="Infection rate", main="AS infection rate by size")
