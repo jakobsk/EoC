@@ -24,4 +24,4 @@ asnRates <- aggregate(. ~ Country+ASN, ipsPerAllocation, sum)
 asnRates$ASN <- NULL
 
 # Plot
-plot(asnRates$AllocationSize, asnRates$IPs, log="xy", xlab="Number of allocations", ylab="Infection rate", main="AS infection rate by size")
+plot(asnRates$AllocationSize, asnRates$IPs, xlab="Number of allocations", ylab="Amount of infections", main="AS infections by size", log="xy")
