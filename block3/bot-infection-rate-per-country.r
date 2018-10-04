@@ -65,4 +65,12 @@ plot_freq_reverse <- (
 print(plot_freq_reverse)
 print(plot_freq)
 
+vn_inf <- na.omit(frequencies[(frequencies$Country == "VN"),])
+vn_inf <- mutate(vn_inf, percent = vn_inf$freq/sum(vn_inf$freq) * 100)
+View(vn_inf)
+
+gamut_inf <- na.omit(frequencies[(frequencies$Diagnostic == "BOT gamut"),])
+gamut_inf <- mutate(gamut_inf, percent = gamut_inf$freq/sum(gamut_inf$freq) * 100)
+View(gamut_inf)
+
 
