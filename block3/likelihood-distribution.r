@@ -12,5 +12,5 @@ spamhausVN <- spamhaus[(spamhaus$Country == "VN"),]
 spamhausVN$Date <- as.Date(as.POSIXct(as.integer(spamhausVN$time_t), origin="1970-01-01"))
 
 # Plot likelihood
-daily <- count(spamhausVN, c("Date"))
-plot(density(daily$freq))
+likelihood <- count(spamhausVN, c("Date"))
+plot(density(likelihood$freq))
