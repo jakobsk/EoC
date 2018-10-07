@@ -12,19 +12,24 @@ spamhaus <- spamhaus[(spamhaus$Diagnostic == "BOT gamut"),]
 spamhausVN <- spamhaus[(spamhaus$Country == "VN"),]
 spamhausVN$Date <- as.Date(as.POSIXct(as.integer(spamhausVN$time_t), origin="1970-01-01"))
 
-# Plot likelihood
+# Plot normal distribution
 dailyInfections <- count(spamhausVN, c("Date"))
-dailyInfectionsMax <- max(dailyInfections$freq) * 365
+plot(density(dailyInfections$freq),
+	 main="Expected number of infected machines per day",
+	 xlab="Number of infected machines",
+	 ylab="Density")
 
 likelihoodDist <- fitdist(dailyInfections$freq, "norm")
-likelihoodVN = data.frame()[1:ceiling((dailyInfectionsMax + 1) / 100), ];
-likelihoodVN$infections = seq(from=0, to=dailyInfectionsMax, by=100)
-likelihoodVN$density <- dnorm(likelihoodVN$infections, mean=likelihoodDist$sd[["mean"]] * 365, sd=likelihoodDist$sd[["sd"]] * 365)
-likelihoodVN <- likelihoodVN[(likelihoodVN$density > 1e-10),]
+likelihoodDist$sd <- likelihoodDist$sd * 365 # Days per year
+likelihoodDist$sd <- likelihoodDist$sd / 64000000 # Number of machines
+
+likelihoodVN = data.frame()[0:(ceiling(0.1 / 0.000001)), ];
+likelihoodVN$infections = seq(from=0, to=0.1, by=0.000001)
+likelihoodVN$density <- dnorm(likelihoodVN$infections, mean=likelihoodDist$sd[["mean"]], sd=likelihoodDist$sd[["sd"]])
 
 plot(likelihoodVN$infections,
 	 likelihoodVN$density,
 	 type="l",
-	 main="Expected number of infected machines per year",
-	 xlab="Number of infected machines",
+	 main="Expected ratio of newly infected machines per year",
+	 xlab="Ratio of newly infected machines",
 	 ylab="Density")
