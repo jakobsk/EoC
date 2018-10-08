@@ -7,4 +7,7 @@ rosi <- risk * riskMitigated
 rosi <- rosi - solutionCost
 rosi <- rosi / solutionCost
 
-plot(ecdf(rosi))
+plot(ecdf(rosi),
+	 main="Cumulative probability of ROSI",
+	 xlab="ROSI",
+	 ylab="Probability")
