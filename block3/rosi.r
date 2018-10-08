@@ -10,4 +10,5 @@ rosi <- rosi / solutionCost
 plot(ecdf(rosi),
 	 main="Cumulative probability of ROSI",
 	 xlab="ROSI",
-	 ylab="Probability")
+	 ylab="Cumulative probability")
+abline(v=mean(rosi), col="lightgray")
