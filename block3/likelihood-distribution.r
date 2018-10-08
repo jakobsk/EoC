@@ -23,12 +23,10 @@ likelihoodDist <- fitdist(dailyInfections$freq, "norm")
 likelihoodDist$sd <- likelihoodDist$sd * 365 # Days per year
 likelihoodDist$sd <- likelihoodDist$sd / 43970000 # Number of machines
 
-likelihoodVN = data.frame()[0:(ceiling(0.1 / 0.000001)), ];
-likelihoodVN$infections = seq(from=0, to=0.1, by=0.000001)
-likelihoodVN$density <- dnorm(likelihoodVN$infections, mean=likelihoodDist$sd[["mean"]], sd=likelihoodDist$sd[["sd"]])
+likelihoodVN <- rnorm(10000, mean=likelihoodDist$sd[["mean"]], sd=likelihoodDist$sd[["sd"]])
+likelihoodVN <- density(likelihoodVN[(likelihoodVN >= 0)])
 
-plot(likelihoodVN$infections,
-	 likelihoodVN$density,
+plot(likelihoodVN,
 	 type="l",
 	 main="Expected ratio of newly infected machines per year",
 	 xlab="Ratio of newly infected machines",
