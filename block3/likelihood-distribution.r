@@ -21,7 +21,7 @@ plot(density(dailyInfections$freq),
 
 likelihoodDist <- fitdist(dailyInfections$freq, "norm")
 likelihoodDist$sd <- likelihoodDist$sd * 365 # Days per year
-likelihoodDist$sd <- likelihoodDist$sd / 64000000 # Number of machines
+likelihoodDist$sd <- likelihoodDist$sd / 43970000 # Number of machines
 
 likelihoodVN = data.frame()[0:(ceiling(0.1 / 0.000001)), ];
 likelihoodVN$infections = seq(from=0, to=0.1, by=0.000001)

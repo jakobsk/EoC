@@ -1,7 +1,7 @@
 # Run this after running `risk`
 
 riskMitigated <- 0.1575
-solutionCost <- 1.12e3
+solutionCost <- 112
 
 rosi <- risk * riskMitigated
 rosi <- rosi - solutionCost
