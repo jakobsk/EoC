@@ -10,7 +10,7 @@ Aruba,24371203
 Australia,55692730
 Austria,47347437
 Azerbaijan,4140650
-The Bahamas,32660566
+"Bahamas, The",32660566
 Bahrain,24325794
 Bangladesh,1602555
 Barbados,17757580
@@ -37,10 +37,10 @@ Chile,15067724
 China,8643107
 Colombia,6379606
 Comoros,787897
-Democratic Republic of the Congo,478218
-Republic of Congo,2005336
+"Congo, Dem. Rep. of the",478218
+Congo,2005336
 Costa Rica,11728613
-Côte d'Ivoire,1621403
+Ivory Coast (Cote d'Ivoire),1621403
 Croatia,13271376
 Cyprus,25380484
 Czech Republic,20401577
@@ -54,13 +54,13 @@ El Salvador,3894736
 Equatorial Guinea,14817829
 Eritrea,979692
 Estonia,19735347
-Eswatini,3850545
+Swaziland,3850545
 Ethiopia,872840
 Fiji,5527537
 Finland,45927492
 France,39932686
 Gabon,7373128
-The Gambia,704699
+"Gambia, the",704699
 Georgia,4085834
 Germany,44769224
 Ghana,1662585
@@ -72,12 +72,12 @@ Guinea-Bissau,793622
 Guyana,4578204
 Haiti,783789
 Honduras,2766271
-Hong Kong SAR,46080481
+"Hong Kong, (China)",46080481
 Hungary,14209443
 Iceland,70248268
 India,1976093
 Indonesia,3875769
-Islamic Republic of Iran,5289795
+"Iran, Islamic Republic of",5289795
 Iraq,4950310
 Ireland,68710817
 Israel,40272966
@@ -91,17 +91,17 @@ Kiribati,1721867
 Korea,29938450
 Kosovo,3944121
 Kuwait,27393912
-Kyrgyz Republic,1207781
-Lao PDR,2540842
+Kyrgyzstan,1207781
+Lao People's Dem. Rep.,2540842
 Latvia,15550442
 Lebanon,12013438
 Lesotho,1360557
 Liberia,694166
-Libya,4739917
+Libyan Arab Jamahiriya,4739917
 Lithuania,16730626
 Luxembourg,105863232
-Macao SAR,77111001
-FYR Macedonia,5474423
+"Macao, (China)",77111001
+"Macedonia, TFYR",5474423
 Madagascar,448983
 Malawi,325536
 Malaysia,9755178
@@ -112,13 +112,13 @@ Marshall Islands,4040291
 Mauritania,1271332
 Mauritius,10504468
 Mexico,9318823
-Micronesia,3202753
-Moldova,2694469
+"Micronesia, Fed. States of",3202753
+"Moldova, Republic of",2694469
 Mongolia,3639893
 Montenegro,7678443
 Morocco,3136862
 Mozambique,426091
-Myanmar,1278071
+Myanmar (ex-Burma),1278071
 Namibia,5589462
 Nauru,8574738
 Nepal,848089
@@ -141,7 +141,7 @@ Portugal,21158999
 Puerto Rico,31581394
 Qatar,61024774
 Romania,10785993
-Russia,10955792
+"Russia (Russian Fed.)",10955792
 Rwanda,771674
 Samoa,4258343
 San Marino,47595071
@@ -159,7 +159,7 @@ Somalia,
 South Africa,6179870
 South Sudan,243113
 Spain,28358808
-Sri Lanka,4073309
+Sri Lanka (ex-Ceilan),4073309
 St Kitts and Nevis,17397223
 St Lucia,9606945
 St Vincent and the Grenadines,7124386
@@ -167,15 +167,15 @@ Sudan,1123488
 Suriname,5869515
 Sweden,52925128
 Switzerland,80637381
-Syria,n/a
+Syrian Arab Republic,n/a
 Taiwan Province of China,24292091
 Tajikistan,800802
-Tanzania,1034225
+"Tanzania, United Rep. of",1034225
 Thailand,6590638
-Timor-Leste,2236974
+East Timor (Timor-Leste),2236974
 Togo,611133
 Tonga,4520886
-Trinidad and Tobago,16637650
+Trinidad & Tobago,16637650
 Tunisia,3464717
 Turkey,10537186
 Turkmenistan,6642523
