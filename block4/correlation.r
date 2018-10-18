@@ -49,6 +49,10 @@ ppc$Computer.Science.papers <- NULL
 ti <- read.csv("techindex.csv")
 ti$Technology.Index <- fton(ti$Technology.Index)
 
+## Youth Unemployment Rate
+yur <- read.csv("yur.csv")
+yur$Youth.Unemployment.Rate <- fton(yur$Youth.Unemployment.Rate)
+
 ## Countries
 countries <- read.csv("countries.csv")
 countries$Size <- fton(countries$Size)
@@ -74,6 +78,7 @@ countries <- merge(countries, gci, by="Country")
 countries <- merge(countries, idi, by="Country")
 countries <- merge(countries, ppc, by="Country")
 countries <- merge(countries, ti, by="Country")
+countries <- merge(countries, yur, by="Country")
 
 countries <- merge(countries, mi, by="Symbol")
 countries <- merge(countries, infections, by="Symbol")
@@ -86,6 +91,6 @@ countries$InfectionCount <- NULL
 countries <- countries[,c(
 	"Computers.per.Capita", "GDP.per.capita", "GCI", "IDI",
 	"Computer.Science.papers.ratio", "Technology.Index", "Median.household.income",
-	"Median.per.capita.income", "InfectionRate")]
+	"Median.per.capita.income", "Youth.Unemployment.Rate", "InfectionRate")]
 
 scatterplotMatrix(countries)
