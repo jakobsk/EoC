@@ -1,4 +1,5 @@
 library(plyr)
+library(car)
 
 fton <- function(f) suppressWarnings(as.numeric(as.character(f)))
 cor2 <- function(a, b) c(cor(a, b, method="p"), cor(a, b, method="k"), cor(a, b, method="s"))
@@ -85,3 +86,5 @@ countries <- countries[,c(
 	"Computers.per.Capita", "GDP.per.capita", "GCI", "IDI",
 	"Computer.Science.papers.ratio", "Technology.Index", "Median.household.income",
 	"Median.per.capita.income", "InfectionRate")]
+
+scatterplotMatrix(countries)
