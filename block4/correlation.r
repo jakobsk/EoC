@@ -13,6 +13,7 @@ spamhaus <- read.csv("spamhaus")
 spamhaus$Diagnostic <- as.character(spamhaus$Diagnostic)
 spamhaus <- spamhaus[(complete.cases(spamhaus)),]
 spamhaus <- spamhaus[(spamhaus$Diagnostic == "BOT gamut"),]
+# spamhaus <- spamhaus[(startsWith(spamhaus$Diagnostic, "BOT")),]
 spamhaus <- spamhaus[(spamhaus$Country != "??"),]
 
 ## Computers per capita
