@@ -66,6 +66,13 @@ colnames(infections) <- c("Symbol", "InfectionCount")
 
 
 # Merge datasets
+countries <- merge(countries, cpp, by="Country")
+countries <- merge(countries, gdppc, by="Country")
+countries <- merge(countries, gci, by="Country")
+countries <- merge(countries, idi, by="Country")
+countries <- merge(countries, ppc, by="Country")
+countries <- merge(countries, ti, by="Country")
+
 countries <- merge(countries, mi, by="Symbol")
 countries <- merge(countries, infections, by="Symbol")
 
