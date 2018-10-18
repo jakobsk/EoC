@@ -80,6 +80,8 @@ countries <- merge(countries, infections, by="Symbol")
 countries$InfectionRate <- countries$InfectionCount / countries$InternetUsers
 countries$InfectionCount <- NULL
 
-
-# Find correlation
-cor2(countries$InfectionRate, countries$Median.per.capita.income)
+# Retain only relevant columns
+countries <- countries[,c(
+	"Computers.per.Capita", "GDP.per.capita", "GCI", "IDI",
+	"Computer.Science.papers.ratio", "Technology.Index", "Median.household.income",
+	"Median.per.capita.income", "InfectionRate")]
