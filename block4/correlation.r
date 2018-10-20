@@ -80,7 +80,6 @@ countries <- merge(countries, teri, by="Country")
 countries <- merge(countries, ti, by="Country")
 countries <- merge(countries, yur, by="Country")
 
-countries <- merge(countries, mi, by="Symbol")
 countries <- merge(countries, infections, by="Symbol")
 
 # Derive
@@ -89,8 +88,7 @@ countries$InfectionCount <- NULL
 
 # Retain only relevant columns
 countries <- countries[,c(
-	"Computers.per.Capita", "GDP.per.capita", "GCI", "IDI",
-	"Computer.Science.papers.ratio", "Technology.Index", "Youth.Unemployment.Rate",
-	"TerroristIndex", "InfectionRate")]
+	"Computers.per.Capita", "Computer.Science.papers.ratio", "GCI", "GDP.per.capita", "IDI",
+	"Technology.Index", "TerroristIndex", "Youth.Unemployment.Rate")]
 
 scatterplotMatrix(countries)
