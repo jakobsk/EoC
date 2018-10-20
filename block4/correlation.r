@@ -28,14 +28,9 @@ gdppc$GDP.per.capita <- fton(gdppc$GDP.per.capita)
 gci <- read.csv("gci.csv")
 gci$GCI <- fton(gci$GCI)
 
-## IDI
+## ICT Development Index
 idi <- read.csv("idi.csv")
 idi$IDI <- fton(idi$IDI)
-
-## Median income
-mi <- read.csv("medianincome.csv")
-mi$Median.household.income <- fton(mi$Median.household.income)
-mi$Median.per.capita.income <- fton(mi$Median.per.capita.income)
 
 ## Papers per country
 ppc <- read.csv("ppc.csv")
@@ -45,9 +40,13 @@ ppc$Computer.Science.papers.ratio <- ppc$Papers / ppc$Computer.Science.papers
 ppc$Papers <- NULL
 ppc$Computer.Science.papers <- NULL
 
-## Technology index
+## Technology Index
 ti <- read.csv("techindex.csv")
 ti$Technology.Index <- fton(ti$Technology.Index)
+
+## Terrorism Index
+teri <- read.csv("terroristindex.csv")
+teri$TerroristIndex <- fton(teri$TerroristIndex)
 
 ## Youth Unemployment Rate
 yur <- read.csv("yur.csv")
@@ -77,6 +76,7 @@ countries <- merge(countries, gdppc, by="Country")
 countries <- merge(countries, gci, by="Country")
 countries <- merge(countries, idi, by="Country")
 countries <- merge(countries, ppc, by="Country")
+countries <- merge(countries, teri, by="Country")
 countries <- merge(countries, ti, by="Country")
 countries <- merge(countries, yur, by="Country")
 
@@ -90,7 +90,7 @@ countries$InfectionCount <- NULL
 # Retain only relevant columns
 countries <- countries[,c(
 	"Computers.per.Capita", "GDP.per.capita", "GCI", "IDI",
-	"Computer.Science.papers.ratio", "Technology.Index", "Median.household.income",
-	"Median.per.capita.income", "Youth.Unemployment.Rate", "InfectionRate")]
+	"Computer.Science.papers.ratio", "Technology.Index", "Youth.Unemployment.Rate",
+	"TerroristIndex", "InfectionRate")]
 
 scatterplotMatrix(countries)
