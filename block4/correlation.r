@@ -44,7 +44,7 @@ countries <- countries[, c("Symbol", "Country", "InfectionRate")]
 cpc <- read.csv("cpc.csv")
 cpc$Computers.per.Capita <- fton(cpc$Computers.per.Capita)
 
-## Ratio of Computer Science Papers (CSPR)
+## Computer Science Paper Ratio (CSPR)
 cspr <- read.csv("cspr.csv")
 cspr$Papers <- fton(cspr$Papers)
 cspr$Computer.Science.Papers <- fton(cspr$Computer.Science.Papers)
@@ -78,35 +78,36 @@ yur$Youth.Unemployment.Rate <- fton(yur$Youth.Unemployment.Rate)
 
 
 # Merge datasets
-countries <- merge(countries, cpc, by="Country")
-countries <- merge(countries, cspr, by="Country")
-countries <- merge(countries, gdppc, by="Country")
-countries <- merge(countries, idi, by="Country")
-countries <- merge(countries, gci, by="Country")
-countries <- merge(countries, techi, by="Country")
-countries <- merge(countries, teri, by="Country")
-countries <- merge(countries, yur, by="Country")
+factors <- countries
+# factors <- merge(factors, cpc, by="Country")
+factors <- merge(factors, cspr, by="Country")
+# factors <- merge(factors, gdppc, by="Country")
+factors <- merge(factors, idi, by="Country")
+# factors <- merge(factors, gci, by="Country")
+# factors <- merge(factors, techi, by="Country")
+# factors <- merge(factors, teri, by="Country")
+factors <- merge(factors, yur, by="Country")
 
-countries$Country <- NULL
-countries$Symbol <- NULL
+factors$Country <- NULL
+factors$Symbol <- NULL
 
 
 
 # Analyse
 ## Correlation
-scatterplotMatrix(countries)
-countryCor <- cor(countries)
+scatterplotMatrix(factors)
+factorCor <- cor(factors)
 
 ## Linear model
-infectionModel <- lm(countries$InfectionRate ~
-	+ countries$Computers.per.Capita
-	+ countries$Computer.Science.Paper.Ratio
-	+ countries$Global.Cybersecurity.Index
-	+ countries$GDP.per.Capita
-	+ countries$ICT.Development.Index
-	+ countries$Technology.Index
-	+ countries$Terrorism.Index
-	+ countries$Youth.Unemployment.Rate
-	, countries
+infectionModel <- lm(factors$InfectionRate ~
+	# + factors$Computers.per.Capita
+	+ factors$Computer.Science.Paper.Ratio
+	# + factors$Global.Cybersecurity.Index
+	# + factors$GDP.per.Capita
+	+ factors$ICT.Development.Index
+	# + factors$Technology.Index
+	# + factors$Terrorism.Index
+	+ factors$Youth.Unemployment.Rate
+	, factors
 )
 summary(infectionModel)
