@@ -1,21 +1,45 @@
 library(plyr)
 library(car)
 
+
+# Define custom utility functions
 fton <- function(f) suppressWarnings(as.numeric(as.character(f)))
 cor2 <- function(a, b) c(cor(a, b, method="p"), cor(a, b, method="k"), cor(a, b, method="s"))
 sym_diff <- function(a, b) setdiff(union(a, b), intersect(a, b))
 set_diff <- function(a, b) setdiff(union(a, b), b)
 
-# Preprocess
+
+
+# Read baseline datasets
 ## Spamhaus
-spamhaus <- read.csv("spamhaus")
+spamhaus <- read.csv("spamhaus.csv")
 
 spamhaus$Diagnostic <- as.character(spamhaus$Diagnostic)
 spamhaus <- spamhaus[(complete.cases(spamhaus)),]
 spamhaus <- spamhaus[(spamhaus$Diagnostic == "BOT gamut"),]
-# spamhaus <- spamhaus[(startsWith(spamhaus$Diagnostic, "BOT")),]
 spamhaus <- spamhaus[(spamhaus$Country != "??"),]
 
+## Countries
+countries <- read.csv("countries.csv")
+countries$Size <- fton(countries$Size)
+countries$Population <- fton(countries$Population)
+countries$InternetUsers <- fton(countries$InternetUsers)
+
+countries <- countries[(complete.cases(countries)),]
+countries <- countries[(countries$Symbol != "--"),]
+
+## Derive infection rate
+infections <- count(spamhaus, "Country")
+colnames(infections) <- c("Symbol", "InfectionCount")
+
+countries <- merge(countries, infections, by="Symbol")
+countries$InfectionRate <- countries$InfectionCount / countries$InternetUsers
+
+countries <- countries[, c("Symbol", "Country", "InfectionRate")]
+
+
+
+# Read factor datasets
 ## Computers per Capita (CpC)
 cpc <- read.csv("cpc.csv")
 cpc$Computers.per.Capita <- fton(cpc$Computers.per.Capita)
@@ -23,10 +47,9 @@ cpc$Computers.per.Capita <- fton(cpc$Computers.per.Capita)
 ## Ratio of Computer Science Papers (CSPR)
 cspr <- read.csv("cspr.csv")
 cspr$Papers <- fton(cspr$Papers)
-cspr$Computer.Science.papers <- fton(cspr$Computer.Science.papers)
-cspr$Computer.Science.papers.ratio <- cspr$Papers / cspr$Computer.Science.papers
-cspr$Papers <- NULL
-cspr$Computer.Science.papers <- NULL
+cspr$Computer.Science.Papers <- fton(cspr$Computer.Science.Papers)
+cspr$Computer.Science.Paper.Ratio <- cspr$Papers / cspr$Computer.Science.Papers
+cspr <- cspr[, c("Country", "Computer.Science.Paper.Ratio")]
 
 ## Global Cybersecurity Index (GCI)
 gci <- read.csv("gci.csv")
@@ -52,22 +75,6 @@ teri$Terrorism.Index <- fton(teri$Terrorism.Index)
 yur <- read.csv("yur.csv")
 yur$Youth.Unemployment.Rate <- fton(yur$Youth.Unemployment.Rate)
 
-## Countries
-countries <- read.csv("countries.csv")
-countries$Size <- fton(countries$Size)
-countries$Population <- fton(countries$Population)
-countries$InternetUsers <- fton(countries$InternetUsers)
-
-countries$Date <- NULL
-countries$InternetPenetration <- NULL
-
-countries <- countries[(complete.cases(countries)),]
-countries <- countries[(countries$Symbol != "--"),]
-
-
-# Calculate number of infections per country
-infections <- count(spamhaus, "Country")
-colnames(infections) <- c("Symbol", "InfectionCount")
 
 
 # Merge datasets
@@ -80,15 +87,26 @@ countries <- merge(countries, techi, by="Country")
 countries <- merge(countries, teri, by="Country")
 countries <- merge(countries, yur, by="Country")
 
-countries <- merge(countries, infections, by="Symbol")
+countries$Country <- NULL
+countries$Symbol <- NULL
 
-# Derive
-countries$InfectionRate <- countries$InfectionCount / countries$InternetUsers
-countries$InfectionCount <- NULL
 
-# Retain only relevant columns
-countries <- countries[,c(
-	"Computers.per.Capita", "Computer.Science.Paper.Ratio", "Global.Cybersecurity.Index", "GDP.per.Capita", "ICT.Development.Index",
-	"Technology.Index", "Terrorism.Index", "Youth.Unemployment.Rate")]
 
+# Analyse
+## Correlation
 scatterplotMatrix(countries)
+countryCor <- cor(countries)
+
+## Linear model
+infectionModel <- lm(countries$InfectionRate ~
+	+ countries$Computers.per.Capita
+	+ countries$Computer.Science.Paper.Ratio
+	+ countries$Global.Cybersecurity.Index
+	+ countries$GDP.per.Capita
+	+ countries$ICT.Development.Index
+	+ countries$Technology.Index
+	+ countries$Terrorism.Index
+	+ countries$Youth.Unemployment.Rate
+	, countries
+)
+summary(infectionModel)
