@@ -16,39 +16,39 @@ spamhaus <- spamhaus[(spamhaus$Diagnostic == "BOT gamut"),]
 # spamhaus <- spamhaus[(startsWith(spamhaus$Diagnostic, "BOT")),]
 spamhaus <- spamhaus[(spamhaus$Country != "??"),]
 
-## Computers per capita
-cpp <- read.csv("cpp.csv")
-cpp$Computers.per.Capita <- fton(cpp$Computers.per.Capita)
+## Computers per Capita (CpC)
+cpc <- read.csv("cpc.csv")
+cpc$Computers.per.Capita <- fton(cpc$Computers.per.Capita)
 
-## GDP per capita
-gdppc <- read.csv("gdppc.csv")
-gdppc$GDP.per.capita <- fton(gdppc$GDP.per.capita)
+## Ratio of Computer Science Papers (CSPR)
+cspr <- read.csv("cspr.csv")
+cspr$Papers <- fton(cspr$Papers)
+cspr$Computer.Science.papers <- fton(cspr$Computer.Science.papers)
+cspr$Computer.Science.papers.ratio <- cspr$Papers / cspr$Computer.Science.papers
+cspr$Papers <- NULL
+cspr$Computer.Science.papers <- NULL
 
-## Global Cybersecurity Index
+## Global Cybersecurity Index (GCI)
 gci <- read.csv("gci.csv")
-gci$GCI <- fton(gci$GCI)
+gci$Global.Cybersecurity.Index <- fton(gci$Global.Cybersecurity.Index)
 
-## ICT Development Index
+## GDP per Capita (GDPpC)
+gdppc <- read.csv("gdppc.csv")
+gdppc$GDP.per.Capita <- fton(gdppc$GDP.per.Capita)
+
+## ICT Development Index (IDI)
 idi <- read.csv("idi.csv")
-idi$IDI <- fton(idi$IDI)
+idi$ICT.Development.Index <- fton(idi$ICT.Development.Index)
 
-## Papers per country
-ppc <- read.csv("ppc.csv")
-ppc$Papers <- fton(ppc$Papers)
-ppc$Computer.Science.papers <- fton(ppc$Computer.Science.papers)
-ppc$Computer.Science.papers.ratio <- ppc$Papers / ppc$Computer.Science.papers
-ppc$Papers <- NULL
-ppc$Computer.Science.papers <- NULL
+## Technology Index (TechI)
+techi <- read.csv("techi.csv")
+techi$Technology.Index <- fton(techi$Technology.Index)
 
-## Technology Index
-ti <- read.csv("techindex.csv")
-ti$Technology.Index <- fton(ti$Technology.Index)
+## Terrorism Index (TerI)
+teri <- read.csv("teri.csv")
+teri$Terrorism.Index <- fton(teri$Terrorism.Index)
 
-## Terrorism Index
-teri <- read.csv("terroristindex.csv")
-teri$TerroristIndex <- fton(teri$TerroristIndex)
-
-## Youth Unemployment Rate
+## Youth Unemployment Rate (YUR)
 yur <- read.csv("yur.csv")
 yur$Youth.Unemployment.Rate <- fton(yur$Youth.Unemployment.Rate)
 
@@ -71,13 +71,13 @@ colnames(infections) <- c("Symbol", "InfectionCount")
 
 
 # Merge datasets
-countries <- merge(countries, cpp, by="Country")
+countries <- merge(countries, cpc, by="Country")
+countries <- merge(countries, cspr, by="Country")
 countries <- merge(countries, gdppc, by="Country")
-countries <- merge(countries, gci, by="Country")
 countries <- merge(countries, idi, by="Country")
-countries <- merge(countries, ppc, by="Country")
+countries <- merge(countries, gci, by="Country")
+countries <- merge(countries, techi, by="Country")
 countries <- merge(countries, teri, by="Country")
-countries <- merge(countries, ti, by="Country")
 countries <- merge(countries, yur, by="Country")
 
 countries <- merge(countries, infections, by="Symbol")
@@ -88,7 +88,7 @@ countries$InfectionCount <- NULL
 
 # Retain only relevant columns
 countries <- countries[,c(
-	"Computers.per.Capita", "Computer.Science.papers.ratio", "GCI", "GDP.per.capita", "IDI",
-	"Technology.Index", "TerroristIndex", "Youth.Unemployment.Rate")]
+	"Computers.per.Capita", "Computer.Science.Paper.Ratio", "Global.Cybersecurity.Index", "GDP.per.Capita", "ICT.Development.Index",
+	"Technology.Index", "Terrorism.Index", "Youth.Unemployment.Rate")]
 
 scatterplotMatrix(countries)
